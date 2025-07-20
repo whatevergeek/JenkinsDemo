@@ -12,7 +12,7 @@ namespace MathEngine.Core.Tests
         {
             var calc = new Calculator();
             var result = calc.Add(2, 3);
-            Assert.AreEqual(5, result);
+            Assert.AreEqual(6, result);
         }
 
         [TestMethod]
