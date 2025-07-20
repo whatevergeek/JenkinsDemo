@@ -1,50 +1,69 @@
-# Setting Up Jenkins in Docker
+# Setting Up Jenkins for .NET Projects
 
-## Prerequisites
-- Docker installed
-- Docker Compose installed
+## 1. Start Jenkins Container
 
-## Setup Steps
-
-### 1. Build and Start Jenkins
-
-```bash
-# Navigate to the project directory
-cd path/to/JenkinsDemo
-
-# Create the Jenkins data directory if it doesn't exist
-mkdir -p D:/laboratory/jenkins_data
-
-# Build and start the Jenkins container
-docker-compose up -d
+```powershell
+# Start Jenkins with a clean LTS image
+docker run -d --name jenkins `
+  -p 8081:8080 -p 50001:50000 `
+  -v "D:\laboratory\jenkins_data:/var/jenkins_home" `
+  jenkins/jenkins:lts
 ```
 
-### 2. Get the Initial Admin Password
+## 2. Initial Jenkins Setup
 
-```bash
-# Wait for Jenkins to start (may take a minute)
-docker-compose exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
-```
+1. Get the initial admin password:
+   ```powershell
+   docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+   ```
 
-### 3. Complete Jenkins Setup
-
-1. Open your browser and navigate to http://localhost:8081
-2. Enter the admin password from step 2
-3. Choose "Install suggested plugins" or select specific plugins
-4. Create your admin user when prompted
-5. Configure Jenkins URL (default is fine)
+2. Open your browser and navigate to http://localhost:8081
+3. Enter the admin password
+4. Choose "Install suggested plugins" or select specific plugins
+5. Create your admin user when prompted
 6. Click "Start using Jenkins"
 
-### 4. Configure .NET Tools in Jenkins
+## 3. Install Required Jenkins Plugins
+
+1. Go to "Manage Jenkins" > "Manage Plugins" > "Available"
+2. Search for and install these plugins:
+   - .NET SDK Support
+   - MSTest Plugin
+   - JUnit Plugin
+   - Docker Pipeline
+
+3. Restart Jenkins when prompted
+
+## 4. Install .NET SDK via Jenkins Portal
 
 1. Go to "Manage Jenkins" > "Global Tool Configuration"
-2. Scroll to ".NET SDK" section (should be available from the pre-installed plugin)
+2. Scroll down to find the ".NET SDK" section
 3. Click "Add .NET SDK"
-4. Name it "Default .NET SDK"
-5. Leave installation directory blank to use the one we installed in the Docker image
-6. Save the configuration
+4. Fill in the following:
+   - Name: `Default .NET SDK`
+   - Install automatically: Check this box
+   - Version: Select the version you need (e.g., `.NET 8.0.100`)
+5. Save the configuration
 
-### 5. Create a Pipeline Job
+## 5. Update Your Jenkinsfile
+
+Ensure your Jenkinsfile includes the tools section to use the configured .NET SDK:
+
+```groovy
+pipeline {
+  agent any
+  
+  tools {
+    dotnet 'Default .NET SDK'
+  }
+
+  stages {
+    // Your build stages here
+  }
+}
+```
+
+## 6. Create a Pipeline Job
 
 1. Click "New Item" on the Jenkins dashboard
 2. Enter a name (e.g., "MathEngine-CI")
@@ -57,25 +76,8 @@ docker-compose exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 9. Set "Script Path" to "Jenkinsfile"
 10. Click "Save"
 
-### 6. Run the Pipeline
+## 7. Run the Pipeline
 
 1. Click on your new pipeline job
 2. Click "Build Now"
 3. Watch the pipeline execute the stages defined in your Jenkinsfile
-
-## Troubleshooting
-
-- If Jenkins can't find the .NET SDK, verify it's installed correctly in the container:
-  ```bash
-  docker-compose exec jenkins dotnet --version
-  ```
-
-- If you need to restart Jenkins:
-  ```bash
-  docker-compose restart
-  ```
-
-- To view Jenkins logs:
-  ```bash
-  docker-compose logs -f jenkins
-  ```
