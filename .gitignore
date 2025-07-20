@@ -41,6 +41,14 @@ _ReSharper*/
 **/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
+# NuGet project files
+**/*.csproj.nuget.dgspec.json
+**/project.assets.json
+**/project.nuget.cache
+
+# Ignore all obj directory contents completely
+**/obj/**/*
+**/bin/**/*
 
 # Test Results
 [Tt]est[Rr]esult*/
