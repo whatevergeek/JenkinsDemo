@@ -1,26 +1,28 @@
 pipeline {
-  agent {
-    docker {
-      image 'mcr.microsoft.com/dotnet/sdk:7.0'
-    }
+  agent any
+  
+  tools {
+    // Use .NET SDK from Jenkins tool installations
+    // Make sure to configure this tool name in Jenkins
+    dotnet 'Default .NET SDK'
   }
 
   stages {
     stage('Restore') {
       steps {
-        sh 'dotnet restore'
+        bat 'dotnet restore'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'dotnet build --configuration Release'
+        bat 'dotnet build --configuration Release'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger "trx" --results-directory "./TestResults"'
+        bat 'dotnet test tests/MathEngine.Core.Tests/ --logger "trx" --results-directory "./TestResults"'
       }
     }
   }
