@@ -34,7 +34,21 @@ docker run -d --name jenkins `
 
 3. Restart Jenkins when prompted
 
-## 4. Install .NET SDK via Jenkins Portal
+## 4. Install ICU Libraries in Jenkins Container
+
+```powershell
+# Connect to the Jenkins container as root user
+docker exec -it -u root jenkins bash
+
+# Install ICU libraries required by .NET
+apt-get update
+apt-get install -y libicu-dev
+
+# Exit the container
+exit
+```
+
+## 5. Install .NET SDK via Jenkins Portal
 
 1. Go to "Manage Jenkins" > "Global Tool Configuration"
 2. Scroll down to find the ".NET SDK" section
@@ -45,7 +59,7 @@ docker run -d --name jenkins `
    - Version: Select the version you need (e.g., `.NET 8.0.100`)
 5. Save the configuration
 
-## 5. Update Your Jenkinsfile
+## 6. Update Your Jenkinsfile
 
 Ensure your Jenkinsfile includes the tools section to use the configured .NET SDK:
 
@@ -63,7 +77,7 @@ pipeline {
 }
 ```
 
-## 6. Create a Pipeline Job
+## 7. Create a Pipeline Job
 
 1. Click "New Item" on the Jenkins dashboard
 2. Enter a name (e.g., "MathEngine-CI")
@@ -76,7 +90,7 @@ pipeline {
 9. Set "Script Path" to "Jenkinsfile"
 10. Click "Save"
 
-## 7. Run the Pipeline
+## 8. Run the Pipeline
 
 1. Click on your new pipeline job
 2. Click "Build Now"
