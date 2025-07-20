@@ -16,14 +16,14 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger ""trx""'
+        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger "trx"'
       }
     }
   }
 
   post {
     always {
-      junit 'tests/**/TestResults/*.trx'
+      junit 'tests/**/*.trx'
     }
   }
 }
