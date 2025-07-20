@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'mcr.microsoft.com/dotnet/sdk:7.0'
+    }
+  }
 
   stages {
     stage('Restore') {
@@ -16,14 +20,14 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger ""trx""'
+        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger "trx" --results-directory "./TestResults"'
       }
     }
   }
 
   post {
     always {
-      junit 'tests/**/TestResults/*.trx'
+      junit 'TestResults/**/*.trx'
     }
   }
 }
