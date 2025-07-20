@@ -1,35 +1,29 @@
 pipeline {
   agent any
-  
-  tools {
-    // Use .NET SDK from Jenkins tool installations
-    // Make sure to configure this tool name in Jenkins
-    dotnet 'Default .NET SDK'
-  }
 
   stages {
     stage('Restore') {
       steps {
-        bat 'dotnet restore'
+        sh 'dotnet restore'
       }
     }
 
     stage('Build') {
       steps {
-        bat 'dotnet build --configuration Release'
+        sh 'dotnet build --configuration Release'
       }
     }
 
     stage('Test') {
       steps {
-        bat 'dotnet test tests/MathEngine.Core.Tests/ --logger "trx" --results-directory "./TestResults"'
+        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger ""trx""'
       }
     }
   }
 
   post {
     always {
-      junit 'TestResults/**/*.trx'
+      junit 'tests/**/TestResults/*.trx'
     }
   }
 }

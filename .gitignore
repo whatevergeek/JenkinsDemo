@@ -103,3 +103,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+src/MathEngine.Core/obj/MathEngine.Core.csproj.nuget.dgspec.json
+src/MathEngine.Core/obj/MathEngine.Core.csproj.nuget.dgspec.json
+src/MathEngine.Core/obj/project.assets.json
