@@ -5,6 +5,7 @@ pipeline {
     stage('Restore') {
       steps {
         sh 'dotnet restore'
+        sh 'dotnet add tests/MathEngine.Core.Tests/MathEngine.Core.Tests.csproj package JunitXml.TestLogger'
       }
     }
 
@@ -16,7 +17,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger "junit;LogFilePath=./TestResults/results.xml"'
+        sh 'dotnet test tests/MathEngine.Core.Tests/ --logger:"junit" --results-directory:"./TestResults"'
       }
     }
   }
@@ -24,7 +25,7 @@ pipeline {
   post {
     always {
       sh 'find . -name "*.xml" -type f'
-      junit 'TestResults/*.xml'
+      junit testResults: 'TestResults/*.xml', allowEmptyResults: true
     }
   }
 }
