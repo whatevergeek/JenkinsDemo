@@ -1,108 +1,42 @@
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
 [Bb]in/
 [Oo]bj/
 **/[Bb]in/**
 **/[Oo]bj/**
 [Ll]og/
 [Ll]ogs/
-
-# Visual Studio files
-.vs/
-*.user
-*.userosscache
-*.suo
-*.userprefs
-*.dbmdl
-*.dbproj.schemaview
-*.jfm
-*.pfx
-*.publishsettings
-
-# ReSharper
-_ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
-
-# NuGet
-*.nupkg
-# NuGet Symbol Packages
-*.snupkg
-# The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
-# except build/, which is used as an MSBuild target.
-!**/[Pp]ackages/build/
-# NuGet project files
-**/*.csproj.nuget.dgspec.json
-**/project.assets.json
-**/project.nuget.cache
-
-# Ignore all obj directory contents completely
-**/obj/**/*
-**/bin/**/*
-
-# Test Results
 [Tt]est[Rr]esult*/
-tests/**/obj/
+TestResults/
 
-# .NET Core
-project.lock.json
-project.fragment.lock.json
-artifacts/
-*.nuget.props
-*.nuget.targets
-.dotnet/
-*.dll.config
-*.exe.config
-*.cache
-*.CopyComplete
-*AssemblyReference.cache
-*.GeneratedMSBuildEditorConfig.editorconfig
-*.AssemblyInfo.cs
-*.AssemblyInfoInputs.cache
-*.assets.cache
-*.csproj.FileListAbsolute.txt
-*.GlobalUsings.g.cs
-
-# VS Code
+# Visual Studio / VS Code
+.vs/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*.code-workspace
+*.user
+*.suo
+*.userosscache
 
-# Local History for Visual Studio Code
-.history/
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.assets.json
+*.csproj.nuget.dgspec.json
+project.nuget.cache
 
-# Windows image file caches
+# .NET Core
+artifacts/
+*.dll.config
+*.cache
+
+# Windows
 Thumbs.db
-ehthumbs.db
-
-# Folder config file
 Desktop.ini
-
-# Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-src/MathEngine.Core/obj/MathEngine.Core.csproj.nuget.dgspec.json
-src/MathEngine.Core/obj/MathEngine.Core.csproj.nuget.dgspec.json
-src/MathEngine.Core/obj/project.assets.json
