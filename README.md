@@ -10,7 +10,7 @@ This project demonstrates a Test-Driven Development (TDD) class library in .NET,
 
 ## 📁 Structure
 - `src/` - Core logic (e.g. Calculator)
-- `tests/` - xUnit tests
+- `tests/` - unit tests
 - `Jenkinsfile` - Declarative CI pipeline
 
 ## 🚀 Quick Commands
