@@ -19,3 +19,19 @@ dotnet restore
 dotnet build --configuration Release
 dotnet test
 ```
+
+## 🐳 Jenkins Docker Setup
+```bash
+# Start Jenkins with Docker Compose
+docker-compose up -d
+
+# Get the initial admin password
+docker-compose exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+# Access Jenkins at http://localhost:8081
+```
+
+The Docker setup includes:
+- Jenkins LTS with .NET SDK 8.0
+- Essential Jenkins plugins for .NET projects
+- Persistent volume for Jenkins data
