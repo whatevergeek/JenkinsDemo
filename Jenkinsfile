@@ -23,7 +23,8 @@ pipeline {
 
   post {
     always {
-      junit 'tests/**/*.trx'
+      sh 'find tests -name "*.trx" -type f'
+      junit 'tests/MathEngine.Core.Tests/TestResults/*.trx'
     }
   }
 }
