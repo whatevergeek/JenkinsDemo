@@ -4,7 +4,7 @@ This project demonstrates a Test-Driven Development (TDD) class library in .NET,
 
 ## 🧪 Features
 - Class library: `MathEngine.Core`
-- Unit tests: xUnit
+- Unit tests: MSTest
 - Jenkins Pipeline: restore, build, test
 - Compatible with Docker, Git, and Windows-based Jenkins setups
 
